@@ -1,0 +1,11 @@
+{
+  "name": "koovdev_error",
+  "version": "0.0.1",
+  "description": "error handling utilities",
+  "main": "koovdev_error.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
