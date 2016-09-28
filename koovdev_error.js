@@ -6,7 +6,7 @@
 'use strict';
 
 const error_p = (err) => {
-  if (!err)
+  if (err === null)
     return false;
   if (typeof err === 'object')
     return !!err.error;
@@ -17,13 +17,13 @@ const generate_make_error = (category, no_errors) => {
   return (tag, err) => {
     if (no_errors.includes(tag))
       return err;
-    const original_err = err;
+    const original_err = JSON.stringify(err);
     if (typeof err === 'string')
       err = { msg: err };
     if (typeof err !== 'object' || err === null)
       err = { msg: 'unknown error' };
     err.error = true;
-    err.original_error = JSON.stringify(original_err);
+    err.original_error = original_err;
     if (!err.error_code)
       err.error_code = ((category << 8) | tag) & 0xffff;
     return err;

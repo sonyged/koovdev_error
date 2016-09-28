@@ -4,7 +4,13 @@
   "description": "error handling utilities",
   "main": "koovdev_error.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive -R spec -r should",
+    "posttest": "./node_modules/.bin/istanbul check-coverage && rm -rf coverage"
+  },
+  "devDependencies": {
+    "mocha": "latest",
+    "istanbul": "latest",
+    "should": "latest"
   },
   "author": "",
   "license": "ISC"
