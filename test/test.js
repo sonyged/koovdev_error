@@ -22,6 +22,12 @@ describe('error predicate', () => {
   it('should treat null as success', () => {
     assert.equal(error_p(null), false);
   });
+  it('should treat undefined as success', () => {
+    assert.equal(error_p(undefined), false);
+  });
+  it('should treat false as success', () => {
+    assert.equal(error_p(false), false);
+  });
   it('should treat object without error property as success', () => {
     assert.equal(error_p({}), false);
   });

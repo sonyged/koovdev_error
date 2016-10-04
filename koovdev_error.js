@@ -6,7 +6,7 @@
 'use strict';
 
 const error_p = (err) => {
-  if (err === null)
+  if (err === null || err === undefined || err === false)
     return false;
   if (typeof err === 'object')
     return !!err.error;
