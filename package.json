@@ -1,6 +1,6 @@
 {
   "name": "koovdev_error",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "error handling utilities",
   "main": "koovdev_error.js",
   "scripts": {
@@ -8,9 +8,9 @@
     "posttest": "./node_modules/.bin/istanbul check-coverage && rm -rf coverage"
   },
   "devDependencies": {
-    "mocha": "latest",
-    "istanbul": "latest",
-    "should": "latest"
+    "mocha": "^3.3.0",
+    "istanbul": "^0.4.5",
+    "should": "^11.2.1"
   },
   "author": "",
   "license": "ISC"
