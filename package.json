@@ -1,6 +1,6 @@
 {
   "name": "koovdev_error",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "error handling utilities",
   "main": "koovdev_error.js",
   "scripts": {
