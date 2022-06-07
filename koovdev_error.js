@@ -39,16 +39,35 @@ const generate_make_error = (category, no_errors) => {
   return (tag, err) => {
     if (no_errors.includes(tag))
       return err;
-    const original_err = JSON.stringify(err);
-    if (typeof err === 'string')
-      err = { msg: err };
-    if (typeof err !== 'object' || err === null)
-      err = { msg: 'unknown error' };
-    err.error = true;
-    err.original_error = original_err;
-    if (!err.error_code)
-      err.error_code = ((category << 8) | tag) & 0xffff;
-    return err;
+    const original_err = (() => {
+      if (err instanceof Error)
+        return err;
+      return JSON.stringify(err);
+    })();
+    // Conver error object to pure object and add our error_code
+    const obj = (() => {
+      if (typeof err === 'string')
+        return { msg: err };
+      if (typeof err !== 'object' || err === null)
+        return { msg: 'unknown error' };
+      if (err instanceof Error)
+        return { msg: `${err}` };
+      if (!Object.getPrototypeOf(err).isPrototypeOf(Object)) {
+        const name = (() => {
+          if (typeof err !== 'object')
+            return typeof err;
+          return err.constructor?.name;
+        })();
+        return { msg: `unsupported error type '${name}'` };
+      }
+      return { ...err };
+    })();
+    obj.error = true;
+    if (!obj.original_error)
+      obj.original_error = original_err;
+    if (!obj.error_code)
+      obj.error_code = ((category << 8) | tag) & 0xffff;
+    return obj;
   };
 };
 
