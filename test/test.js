@@ -89,5 +89,30 @@ describe('error constructor', () => {
       msg: "error occurred",
       original_error: "\"error occurred\"",
     });
+
+    assert.deepEqual(make_error(TEST_MISC_ERROR, new Error('Error')), {
+      error: true,
+      error_code: 65282,
+      msg: "Error: Error",
+      original_error: new Error('Error'),
+    });
+
+    assert.deepEqual(
+      make_error(
+        TEST_MISC_ERROR,
+        make_error(TEST_MISC_ERROR, new Error('Error'))), {
+          error: true,
+          error_code: 65282,
+          msg: "Error: Error",
+          original_error: new Error('Error'),
+        });
+
+    class X {};
+    assert.deepEqual(make_error(TEST_MISC_ERROR, new X()), {
+      error: true,
+      error_code: 65282,
+      msg: "unsupported error type 'X'",
+      original_error: "{}",
+    });
   });
 });
