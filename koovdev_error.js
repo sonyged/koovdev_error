@@ -56,7 +56,7 @@ const generate_make_error = (category, no_errors) => {
         const name = (() => {
           if (typeof err !== 'object')
             return typeof err;
-          return err.constructor?.name;
+          return err.constructor.name;
         })();
         return { msg: `unsupported error type '${name}'` };
       }
